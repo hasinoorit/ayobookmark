@@ -16,6 +16,8 @@
   "dependencies": {
     "@mdi/js": "^6.9.96",
     "ayoflex": "^1.0.1",
-    "dexie": "^3.2.2"
+    "dexie": "^3.2.2",
+    "filepond": "^4.30.4",
+    "svelte-filepond": "^0.2.0"
   }
 }
