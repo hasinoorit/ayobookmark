@@ -16,12 +16,12 @@
   const deleteCategory = async () => {
     await db.table("categories").delete(category.id)
     const bookmarsk = await db
-      .table("urls")
+      .table("bookmarks")
       .where("category")
       .equals(category.id)
       .sortBy("position")
     const bookmarkKeys = bookmarsk.map((i) => i.id)
-    await db.table("categories").bulkDelete(bookmarkKeys)
+    await db.table("bookmarks").bulkDelete(bookmarkKeys)
     close()
   }
 </script>

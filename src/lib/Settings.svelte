@@ -1,8 +1,9 @@
 <script>
   // @ts-nocheck
+  import { createEventDispatcher } from "svelte"
   import db from "./db"
   import Modal from "./Modal.svelte"
-  import FilePond from "svelte-filepond"
+  const dispatch = createEventDispatcher()
   const downloadBackup = async () => {
     const categories = await db.table("categories").toArray()
     const bookmarks = await db.table("bookmarks").toArray()
@@ -18,6 +19,7 @@
     document.body.appendChild(element)
     element.click()
     document.body.removeChild(element)
+    dispatch("close")
   }
   const onChange = (event) => {
     var reader = new FileReader()
@@ -29,12 +31,18 @@
     const backup = JSON.parse(event.target.result)
     await db.table("categories").bulkPut(backup.categories)
     await db.table("bookmarks").bulkPut(backup.bookmarks)
+    dispatch("close")
   }
 </script>
 
 <Modal title="Manage Bookmarks" on:close>
   <label class="file">
-    <input type="file" id="file" aria-label="File browser example" />
+    <input
+      type="file"
+      id="file"
+      aria-label="File browser example"
+      on:change={onChange}
+    />
     <span class="file-custom" />
   </label>
   <h4 class="ta-center my-3">Or</h4>
