@@ -65,10 +65,7 @@
   }
 </script>
 
-<div
-  bind:this={_this}
-  class="container row cols-2 cols-md-4 cols-lg-6 mt-5 mt-sm-5 mt-md-5 mt-lg-5 mt-xl-5 mt-xxl-5"
->
+<div bind:this={_this} class="container row cols-2 cols-md-3 cols-lg-4 cols-xl-5">
   {#if $bookmarks}
     {#each $bookmarks as bookmark (bookmark.id)}
       <div

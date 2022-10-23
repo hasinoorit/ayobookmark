@@ -14,8 +14,14 @@
   let newBookmark = { category: selectedCategory, url: "", title: "", icon: "" }
 
   const addBookmark = async () => {
-    const totalBookmark = await db.table("bookmarks").toArray()
-    await db.table("bookmarks").add({ ...newBookmark, position: totalBookmark.length })
+    const totalBookmark = await db
+      .table("bookmarks")
+      .where("category")
+      .equals(newBookmark.category)
+      .reverse()
+      .sortBy("position")
+    const position = totalBookmark[0] ? totalBookmark[0].position + 1 : 1
+    await db.table("bookmarks").add({ ...newBookmark, position })
     newBookmark = { category: 0, url: "", title: "", icon: "" }
     dispatch("close")
   }

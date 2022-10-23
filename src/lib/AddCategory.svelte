@@ -6,10 +6,9 @@
 
   let newCategoryName = ""
   const addCategory = async () => {
-    const allCategory = await db.table("categories").toArray()
-    await db
-      .table("categories")
-      .add({ title: newCategoryName, position: allCategory.length })
+    const currentLast = await db.table("categories").orderBy("position").last()
+    const position = currentLast ? currentLast.position + 1 : 1
+    await db.table("categories").add({ title: newCategoryName, position: position })
     newCategoryName = ""
     dispatch("close")
   }

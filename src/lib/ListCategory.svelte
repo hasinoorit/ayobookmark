@@ -67,14 +67,17 @@
   }
 </script>
 
-<div class="container row cols-2 cols-md-4 cols-lg-6" bind:this={_this}>
+<div class="container row cols-2 cols-md-3 cols-lg-4 cols-xl-5" bind:this={_this}>
   {#if $categories}
     {#each $categories as category (category.id)}
       <div
         class="category"
         class:selected={selectedCategory === category.id}
         tabindex="0"
-        on:click={() => (selectedCategory = category.id)}
+        on:click={() => {
+          selectedCategory = category.id
+          return false
+        }}
         animate:flip={{ delay: 0, duration: 1050, easing: quintOut }}
         draggable={true}
         on:dragstart={(event) => dragstart(event, category.position)}

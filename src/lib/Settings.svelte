@@ -3,6 +3,7 @@
   import { createEventDispatcher } from "svelte"
   import db from "./db"
   import Modal from "./Modal.svelte"
+  export let colorTheme = "auto"
   const dispatch = createEventDispatcher()
   const downloadBackup = async () => {
     const categories = await db.table("categories").toArray()
@@ -36,7 +37,15 @@
 </script>
 
 <Modal title="Manage Bookmarks" on:close>
-  <label class="file">
+  <label class="theme">
+    <span>Theme</span>
+    <select bind:value={colorTheme} class="input">
+      <option value="auto">Auto</option>
+      <option value="dark">Dark</option>
+      <option value="light">light</option>
+    </select>
+  </label>
+  <label class="file mt-4">
     <input
       type="file"
       id="file"

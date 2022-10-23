@@ -53,7 +53,7 @@
   }
   .ayo-modal {
     position: fixed;
-    max-width: 100%;
+    max-width: calc(100% - 1rem);
     width: 400px;
     background: var(--bg);
     backdrop-filter: blur(3px);
